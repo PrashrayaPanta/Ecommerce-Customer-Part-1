@@ -30,7 +30,8 @@ const Layout = () => {
     setopenBrandItem(!openBrandItem);
   };
 
-  const [search, setSearch] = useState("");
+  const [term, setTerm] = useState("");
+
   const [categories, setCategories] = useState([]);
 
   const [brands, setBrands] = useState([]);
@@ -122,6 +123,11 @@ const Layout = () => {
     ClearStorage("customerPartToken");
     dispatch(clearUser());
     navigate("/");
+  };
+
+  const SearchValueApi = (e) => {
+    e.preventDefault();
+    navigate(`/search?name=${term}`);
   };
 
   const getUserProfile = async () => {
@@ -309,12 +315,12 @@ const Layout = () => {
                   placeholder="Search..."
                   aria-label="Search"
                   className="w-full px-2 py-2 rounded border-1 focus:outline-none focus:border-blue-400"
-                  value={search}
-                  onChange={({ target }) => setSearch(target.value)}
+                  value={term}
+                  onChange={({ target }) => setTerm(target.value)}
                 />
                 <button
                   className="absolute right-2 top-2 cursor-pointer"
-                  // onClick={SearchValueApi}
+                  onClick={SearchValueApi}
                 >
                   <i className="fas fa-search"></i>
                   <span class="sr-only">Search Button</span>

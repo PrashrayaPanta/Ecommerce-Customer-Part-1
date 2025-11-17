@@ -12,6 +12,7 @@ import Category from "./pages/Category";
 import Brand from "./pages/Brand";
 import Home from "./pages/Home";
 import { PrivateRoute } from "./Routes/PrivateRoute";
+import Search from "./pages/Search";
 
 function App() {
   return (
@@ -32,6 +33,8 @@ function App() {
             <Route path="dashboard" element={<Dashboard />} />
 
             <Route path="product/:slug" element={<Product />} />
+
+            <Route path="search" element={<Search />} />
 
             <Route path="categories/:slug" element={<Category />} />
 
