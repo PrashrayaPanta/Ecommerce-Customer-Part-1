@@ -27,12 +27,25 @@ const Brand = () => {
       }
     };
     getCategoryProducts();
-  }, []);
+  }, [slug]);
 
   return (
-    <div>
-      {loading ? <LoadingComponent /> : <ProductSection products={products} />}
-    </div>
+    <>
+      {loading ? (
+        <LoadingComponent />
+      ) : (
+        <>
+          {products.length > 0 ? (
+            <ProductSection
+              title={`Products of Brand Category`}
+              products={products}
+            />
+          ) : (
+            <h1 className="text-center">Data Not available</h1>
+          )}
+        </>
+      )}
+    </>
   );
 };
 

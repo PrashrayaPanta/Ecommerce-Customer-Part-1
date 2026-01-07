@@ -50,8 +50,6 @@ const Layout = () => {
 
   console.log(cart);
 
-  // console.log(brands);
-
   const getCategoriesData = async () => {
     try {
       setLoading(true);
@@ -128,6 +126,7 @@ const Layout = () => {
   const SearchValueApi = (e) => {
     e.preventDefault();
     navigate(`/search?name=${term}`);
+    setTerm("");
   };
 
   const getUserProfile = async () => {
@@ -355,12 +354,12 @@ const Layout = () => {
                     <ul className="absolute left-0  hidden group-hover:block bg-white border shadow-lg z-2">
                       {categories?.map((category, index) => (
                         <li key={index}>
-                          <a
-                            href={`/categories/${category.slug}`}
+                          <Link
+                            to={`/categories/${category.slug}`}
                             className="block px-4 py-2 hover:bg-gray-100"
                           >
                             {category.name}
-                          </a>
+                          </Link>
                         </li>
                       ))}
 
