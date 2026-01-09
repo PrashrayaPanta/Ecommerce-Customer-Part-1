@@ -1,5 +1,15 @@
 import React, { useEffect, useState } from "react";
 
+// import Swiper core and required modules
+import { Navigation, Autoplay } from "swiper/modules";
+
+import { Swiper, SwiperSlide } from "swiper/react";
+
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/autoplay";
+
 import {
   Sheet,
   SheetContent,
@@ -108,6 +118,8 @@ export const Product = () => {
     }
   }, [product]);
 
+  console.log(product);
+
   return (
     <>
       <main class="px-4 py-8">
@@ -115,21 +127,28 @@ export const Product = () => {
           <div class="flex flex-col lg:flex-row gap-8">
             {/* Img part */}
             <div class="lg:w-5/12">
-              <div class="mb-4 border-2 border-gray-200 rounded-xl overflow-hidden">
-                {/* <img src="../image-1.jpg" alt="" srcset="" /> */}
-
-                {/* {product?.images?.[0]?.public_id && (
-                  <img
-                    src={imgURL(product.images[0].public_id)}
-                    alt="Product Image"
-                  />
-                )} */}
-
-                <img
-                  src={imgURLForProduct(product?.images?.[0]?.public_id)}
-                  alt=""
-                  srcset=""
-                />
+              <div class="mb-4 border-2 border-gray-200 rounded-xl">
+                <Swiper
+                  spaceBetween={20} // Adjust spacing between slides
+                  slidesPerView={1} // Show two slides at a time
+                  navigation={true} // Enable navigation buttons
+                  autoplay={{
+                    delay: 3000, // Delay between slides in milliseconds (3 seconds)
+                    disableOnInteraction: false, // Autoplay continues even after user interaction
+                  }}
+                  modules={[Navigation, Autoplay]} // Include Navigation and Autoplay modules
+                >
+                  {product?.images?.map((image) => (
+                    <SwiperSlide>
+                      <img
+                        src={imgURLForProduct(image?.public_id)}
+                        alt={product.summary}
+                        srcset=""
+                        className="w-full h-96 object-cover rounded-lg  hover:cursor-zoom-in hover:scale-110 transition-transform duration-300 -z-4"
+                      />
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
 
                 {/* <div className="border-2 border-dashed rounded-xl w-full h-96 bg-[url(`../image-1.jpg`)] bg-cover bg-no-repeat   hover:cursor-zoom-in hover:bg-size-[150%]"></div> */}
               </div>
