@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
-
-// Import the Swiper component
-// import SwiperComponentForLatestProducts from "../components/ui/swiper1";
+import { useLocation } from "react-router-dom";
 
 import SwiperComponent from "../components/ui/swiper";
-import ProductCard from "../components/ui/ProductCard";
 import http from "../http";
-import LoadingComponent from "../components/ui/LoadingComponent";
 import ProductSection from "../components/ui/ProductSection";
 
 const Home = () => {
+  console.log("I am inside the Home Ciomppoennt");
+
   const location = useLocation();
+
+  console.log("I am after the location");
 
   console.log(location);
 
@@ -19,24 +18,38 @@ const Home = () => {
 
   const [Loading, setLoading] = useState(false);
 
+  const [totalItems, setTotalItems] = useState("");
+
+  const [totalPages, setTotalPages] = useState("");
+
+  const getPageMuchProducts = async (page = 1, limit = 8) => {
+    try {
+      console.log("I am insdie useEffect ko callback");
+
+      setLoading(true);
+
+      const { data } = await http.get(
+        `/api/products?page=${page}&limit=${limit}`
+      );
+
+      console.log("I am after the data");
+
+      setTotalPages(data.result.totalPages);
+
+      setTotalItems(data.result.totalItems);
+
+      setLatestProducts(data.result.data);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+    // setLoading(true);
+  };
+
   useEffect(() => {
-    const getLatestProducts = async () => {
-      try {
-        setLoading(true);
-        const { data } = await http.get("/api/products/latestproducts");
-        setLatestProducts(data.products);
-      } catch (error) {
-        console.log(error);
-      } finally {
-        setLoading(false);
-      }
-      // setLoading(true);
-    };
-
-    getLatestProducts();
+    getPageMuchProducts();
   }, []);
-
-  // console.log(products);
 
   return (
     <>
@@ -51,11 +64,13 @@ const Home = () => {
         {/* Title of latest Products Section */}
 
         {/* <ProductSection title="Latest Products" /> */}
-
         <ProductSection
           products={Latestproducts}
           Loading={Loading}
-          title="Latest Products"
+          title="All Products"
+          totalPages={totalPages}
+          totalItems={totalItems}
+          getPageMuchProducts={getPageMuchProducts}
         />
       </div>
     </>

@@ -13,7 +13,7 @@ const ProductCard = ({ product }) => {
         <img
           src={imgURLForProduct(product?.images?.[0]?.public_id)}
           alt={product.name}
-          className="w-full h-80 object-cover rounded-lg mb-3 group-hover:scale-105 transition-transform duration-300"
+          className="w-full h-100 object-cover rounded-lg mb-3 group-hover:scale-105 transition-transform duration-300"
         />
       </Link>
 
@@ -28,16 +28,16 @@ const ProductCard = ({ product }) => {
       {hasDiscount ? (
         <div className="flex flex-col items-center justify-center mb-3 h-12">
           <span className="text-gray-400 line-through text-sm">
-            ${product.originalPrice}
+            Rs {product.originalPrice}
           </span>
           <span className="text-xl font-bold text-green-600 leading-tight">
-            ${product.price}
+            Rs {product.price}
           </span>
         </div>
       ) : (
         <div className="flex items-center justify-center mb-3 h-12">
           <span className="text-xl font-bold text-green-600">
-            ${product.price}
+            Rs {product.price}
           </span>
         </div>
       )}
