@@ -71,10 +71,14 @@ const CartBtn = ({
   return (
     <>
       <button
-        class={`w-full bg-black text-white py-2 rounded-lg font-medium hover:bg-gray-800 transition flex items-center justify-center `}
+        className={`w-full bg-black text-white py-2 rounded-lg font-medium hover:bg-gray-800 transition flex items-center justify-center ${
+          !product.stock ? "opacity-50 cursor-not-allowed" : ""
+        }`}
         onClick={handleAddToCart}
+        disabled={!product.stock}
       >
-        <i class={btnIcon}></i> Add to cart
+        <i className={btnIcon}></i>
+        {product.stock ? "Add to cart" : "Out of stock"}
       </button>
     </>
   );
