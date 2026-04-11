@@ -11,7 +11,7 @@ Carousel is made with swiper package
 ## Card is use of shadcn ui for login and register 
 
 
-## The label and input is made by ourSelf
+## The label and input is without using Input Field of shadcn ui
 
 
 
