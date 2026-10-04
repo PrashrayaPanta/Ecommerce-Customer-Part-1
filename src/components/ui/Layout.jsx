@@ -351,15 +351,16 @@ const Layout = () => {
                         />
                       </svg>
                     </Link>
-                    <ul className="absolute left-0  hidden group-hover:block bg-white border shadow-lg z-2">
+                    <ul className="absolute right-1/2 translate-x-1/2  hidden group-hover:block bg-white border shadow-lg z-2">
                       {categories?.map((category, index) => (
                         <li key={index}>
                           <Link
                             to={`/categories/${category.slug}`}
-                            className="block px-4 py-2 hover:bg-gray-100"
+                            className="block px-4 py-2 text-center hover:bg-gray-100 w-full"
                           >
                             {category.name}
                           </Link>
+                          <hr />
                         </li>
                       ))}
 
@@ -393,15 +394,16 @@ const Layout = () => {
                         <path stroke-linecap="round" d="M19 9l-7 7-7-7" />
                       </svg>
                     </Link>
-                    <ul className="absolute left-0  hidden group-hover:block bg-white border shadow-lg z-2">
+                    <ul className="absolute right-1/2 translate-x-1/2  hidden group-hover:block  border shadow-lg z-2 bg-white w-max">
                       {brands?.map((brand) => (
                         <li key={brand._id}>
                           <Link
                             to={`/brands/${brand.slug}`}
-                            className="block px-4 py-2 hover:bg-gray-100"
+                            className="block px-4 py-2 text-center hover:bg-gray-100 w-full"
                           >
                             {brand.name}
                           </Link>
+                          <hr />
                         </li>
                       ))}
                       {/* <li>
@@ -479,7 +481,7 @@ const Layout = () => {
 
         <Sheet className="md:hidden">
           <SheetTrigger>
-            <a href="#" className="md:hidden block px-1">
+            <a href="#" className="md:hidden block">
               {/* Hamberg Menu icon that rigger oofcanvas*/}
               <svg
                 className="w-6 h-6 stroke-current"
@@ -524,14 +526,14 @@ const Layout = () => {
 
                       {open && (
                         <ul className=" bg-white border shadow-lg">
-                          {categories.map((category) => (
+                          {categories.map((category, index) => (
                             <li>
-                              <a
-                                href={`/categories/${category.slug}`}
+                              <Link
+                                to={`/categories/${category.slug}`}
                                 className="block px-4 py-2 hover:bg-gray-100"
                               >
                                 {category.name}
-                              </a>
+                              </Link>
                             </li>
                           ))}
                           {/*                        
@@ -583,12 +585,12 @@ const Layout = () => {
                         <ul className=" bg-white border shadow-lg">
                           {brands.map((brand) => (
                             <li>
-                              <a
-                                href={`/brands/${brand.slug}`}
+                              <Link
+                                to={`/brands/${brand.slug}`}
                                 className="block px-4 py-2 hover:bg-gray-100"
                               >
                                 {brand.name}
-                              </a>
+                              </Link>
                             </li>
                           ))}
                           {/* <li>
